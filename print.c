@@ -45,12 +45,10 @@ size_t print_list(const list_t *h)
 
 /**
  * custom_print - Print formatted output to a specified file descriptor.
- *
  * @fd: file descriptor that holds the printed output.
  * @format: pointer to separator.
  * @...: arguments
  */
-
 void custom_print(int fd, const char *const format, ...)
 {
 	int i = 0, va = 0;
@@ -58,13 +56,11 @@ void custom_print(int fd, const char *const format, ...)
 	char *s;
 
 	va_start(p, format);
-
 	/* Check through the characters of the format string. */
 	while (format && *(format + i) != '\0')
 	{
 		if (format[i] == '%')
 		{
-			/* Check the format specifier after '%'. */
 			switch (format[i + 1])
 			{
 				/* If format specifier is 'c', print a character. */
@@ -73,7 +69,6 @@ void custom_print(int fd, const char *const format, ...)
 				write(fd, &va, 1);
 				i += 2;
 				break;
-
 				/* If format specifier is 'd', print an integer. */
 			case 'd':
 				s = itostr(va_arg(p, int));
@@ -81,7 +76,6 @@ void custom_print(int fd, const char *const format, ...)
 				i += 2;
 				_free(s);
 				break;
-
 				/* If format specifier is 's', print a string. */
 			case 's':
 				s = va_arg(p, char *);
@@ -89,15 +83,11 @@ void custom_print(int fd, const char *const format, ...)
 				i += 2;
 				break;
 			default:
-				break;
-			}
+				break; }
 		}
 		else
 		{
-			/* If no format specifier, write the character to the file descriptor. */
+			/*If no format specifier, write the char to the file descriptor. */
 			write(fd, &format[i], 1);
-			i++;
-		}
-	}
-	va_end(p);
-}
+			i++; } }
+	va_end(p); }

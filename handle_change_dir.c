@@ -15,11 +15,9 @@ void exec_cd_cmd(int argv_count, char **argv, int *status)
 	/* Duplicate the value of th PWD environment variable to the current */
 	/* directory variable. */
 	curr_dir = _strdup(_getenv("PWD"));
-
 	/* Duplicate the value of the OLDPWD environment variable to the */
 	/* environment end variable. */
 	env_value = _strdup(_getenv("OLDPWD"));
-
 	/* Check the number of arguments passed to the cd command. */
 	if (argv_count > 2)
 		handle_usage_err(argv[0], status);
@@ -30,8 +28,7 @@ void exec_cd_cmd(int argv_count, char **argv, int *status)
 			if (chdir(env_value) == -1)
 				handle_err(argv[0], argv[1], status);
 			else
-				set_old_new_pwd(curr_dir, env_value, status);
-		}
+				set_old_new_pwd(curr_dir, env_value, status); }
 		else
 		{
 			if (chdir(argv[1]) == -1)
@@ -39,8 +36,7 @@ void exec_cd_cmd(int argv_count, char **argv, int *status)
 			else
 			{
 
-				set_old_new_pwd(curr_dir, argv[1], status);
-			}
+				set_old_new_pwd(curr_dir, argv[1], status); }
 		}
 	}
 	else
@@ -49,9 +45,7 @@ void exec_cd_cmd(int argv_count, char **argv, int *status)
 		if (chdir(home_value) == -1)
 			handle_err(argv[0], argv[1], status);
 		else
-			set_old_new_pwd(curr_dir, home_value, status);
-	}
-
+			set_old_new_pwd(curr_dir, home_value, status); }
 	/* Frees the memory allocated. */
 	free(curr_dir);
 	free(env_value);

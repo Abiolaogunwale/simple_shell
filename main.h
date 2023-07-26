@@ -108,9 +108,10 @@ void handle_usage_err(char *str, int *status);
 void custom_print(int fd, const char *const format, ...);
 void free_strings(char **s);
 int count_args(char **args);
-void fetch_stream_line(char **line, FILE **stream, size_t *len, ssize_t *bytes);
+void fetch_stream_line(char **line, FILE **stream,
+		size_t *len, ssize_t *bytes);
 void process_line_with_ops(char ***tokens, FILE *stream,
-                        int *statusint, char *shell_name);
+		int *statusint, char *shell_name);
 void handle_syntax_error(char *s, int *status);
 void handle_parsed_cmd(char ***tokens, char *s, FILE *stream, int *status);
 void execute_cmds_with_ops(cmd_ops *ptr_to_cmd_ops, FILE *stream, int *status);

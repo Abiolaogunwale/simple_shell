@@ -2,11 +2,9 @@
 
 /**
  * create_child_pid - Creates a child process to run a command.
- *
  * @status: pointer to status of the command.
  * @arg: pointer to strings representing the command.
 */
-
 void create_child_pid(int *status, char **arg)
 {
 	char **dirs = NULL;
@@ -14,18 +12,13 @@ void create_child_pid(int *status, char **arg)
 	char *file_fullpath = NULL;
 	pid_t child_pid;
 
-	/* Interpret any dollar signs in the command arguments. */
 	process_dollar_sign(arg, *status);
-
-	/* Checks if the given command is built-in or an executable. */
 	file_fullpath = check_builtin_cm_path(arg[0], dirs, head_path);
 	if (file_fullpath == NULL)
 	{
-		print_nonpath_error(arg, status);
-	}
+		print_nonpath_error(arg, status); }
 	else
 	{
-		/* Fork a child process to execute the command. */
 		child_pid = fork();
 		if (child_pid == -1)
 		{
@@ -44,7 +37,6 @@ void create_child_pid(int *status, char **arg)
 		}
 		else
 		{
-			/* Parent pid waiting for the child process to complete executing. */
 			if (wait(status) == -1)
 			{
 				perror("Error");
@@ -52,8 +44,6 @@ void create_child_pid(int *status, char **arg)
 				exit(2);
 			}
 		}
-
-		/* Free the memory allocated. */
 		_free(file_fullpath);
 		file_fullpath = NULL;
 	}
@@ -92,11 +82,11 @@ void print_nonpath_error(char **arg, int *status)
 
 int contains_forward_slash_at_end(char *s)
 {
-        if (!s)
-                return (0);
+	if (!s)
+		return (0);
 
-        /* Checks if last character in the string is '/' */
-        return (s[_strlen(s) - 1] == '/');
+	/* Checks if last character in the string is '/' */
+	return (s[_strlen(s) - 1] == '/');
 }
 
 /**
@@ -109,15 +99,15 @@ int contains_forward_slash_at_end(char *s)
 
 int contains_forward_slash(char *s)
 {
-        if (!s)
+	if (!s)
 		return (0);
 
 	/* Checks if the string contains a '/' character. */
-        while (*s != '\0')
-        {
-                if (*s == '/')
-                        return (1);
-                s++;
-        }
-        return (0);
+	while (*s != '\0')
+	{
+		if (*s == '/')
+			return (1);
+		s++;
+	}
+	return (0);
 }
