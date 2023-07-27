@@ -1,12 +1,11 @@
 #include "main.h"
 
+char *line = NULL;
 
 /**
  * main - Super simple shell.
- *
  * @argc: arguments count.
  * @argv: arguments values.
- *
  * Return: Always 0
  */
 
