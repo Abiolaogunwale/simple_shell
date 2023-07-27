@@ -1,6 +1,5 @@
 #include "main.h"
 
-char *line = NULL;
 
 /**
  * main - Super simple shell.
@@ -13,6 +12,7 @@ char *line = NULL;
 
 int main(int argc, char **argv)
 {
+	char *line = NULL;
 	int status = 0;
 	FILE *stream = stdin;
 	size_t len = 0;
@@ -106,22 +106,16 @@ void execute_cmds_with_ops(cmd_ops *ptr_to_cmd_ops, FILE *stream, int *status)
 {
 	int j = 0, k = 0;
 
-	/* Check through the command tokens array. */
 	while (ptr_to_cmd_ops->cmd_tokens[j] != NULL)
 	{
-		/* Execute the command using handle_parsed_cmd function.*/
 		handle_parsed_cmd(&(ptr_to_cmd_ops->cmd_tokens),
 				  ptr_to_cmd_ops->cmd_tokens[j], stream, status);
 		j++;
-
-		/* Check if there is logical corresponding operator. */
 		if (ptr_to_cmd_ops->ops_tokens[k] == NULL)
 			break;
-
 		if (*status == 0)
 		{
-			/* If the eit status is 0. */
-			if (_strcmp(ptr_to_cmd_ops->ops_tokens[k], "&&") == 0)
+			if (_strcmp(ptr_to_cmd_ops->ops_tokens[k], "&&") == 0) /*exitstatus is 0.*/
 			{
 				k++;
 				continue;

@@ -44,21 +44,18 @@ char *check_builtin_cm_path(char *arg, char **dirs, list_t *head)
 {
 	char *path = NULL, *file_fullpath = NULL;
 	int i = 0, length = 0;
-
 	/* Checks if the argument has a forward slash at the beginning. */
 	if (contains_forward_slash(arg))
 	{
 		/* If arguments ends with a forward slash, its an invalid path */
 		if (contains_forward_slash_at_end(arg))
 			return (NULL);
-
 		/* Check if the path exists. */
 		if (path_exist(arg))
 			return (_strdup(arg));
 		else
 			return (NULL);
 	}
-
 	/* If no forward slash in argument, search the directories. */
 	path = _getenv("PATH");
 	dirs = str_into_tokens(path, ':', head);
@@ -68,7 +65,6 @@ char *check_builtin_cm_path(char *arg, char **dirs, list_t *head)
 	while (dirs[i] != NULL)
 	{
 		dirs[i] = realloc(dirs[i], _strlen(dirs[i]) + length + 2);
-
 		/* Concatenates the directory with the argument using a forward slash. */
 		_strcat(dirs[i], "/");
 		_strcat(dirs[i], arg);
@@ -81,10 +77,8 @@ char *check_builtin_cm_path(char *arg, char **dirs, list_t *head)
 
 		i++;
 	}
-
 	/* Free the linked list and temporary string array. */
 	free_list(head);
 	free_strings(dirs);
-
 	return (file_fullpath);
 }
